@@ -1,3 +1,5 @@
+# Minimal Poster Generator
+## NOTE -  Currently, this project is under development.
 ## Introduction
 This project aims to generate a minimal poster with a title and description as input. The system extracts the necessary details from the description. The internal evaluation uses an LLM guided by a reward function to improve the quality of the poster, inspired by reinforcement learning. This project analyses the potential of using large language models (LLMs) with reinforcement learning in automating difficult tasks with less human intervention
 
@@ -29,5 +31,6 @@ After generating the final poster with the title from Pillow, this poster is fed
 The cycle from LLM to the score calculator runs for 3 iterations. The score from the score calculator is given as a reward to the LLM, which is then asked to improve the score by modifying the
 input prompt or using another set of visual concepts. This approach is inspired by reinforcement learning, where the similarity score acts as a reward signal to guide iterative prompt refinement.
 This cycle acts as an internal evaluation for the system.
+
 
 
