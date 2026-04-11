@@ -4,6 +4,7 @@ This project aims to generate a minimal poster with a title and description as i
 
 ## System Design
 <img src="system_design.png" alt="Design"/>
+<img src="sample_output.png" alr="Sample output"/>
 
 ## Components
 - Input - The input for the system is the title and description.
