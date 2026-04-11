@@ -1,0 +1,124 @@
+<div class="app-container">
+  <nav class="app-header">
+    <div class="header-logo">
+    </div>
+    <!-- @if (job_id) {
+      <div class="header-status">Job ID: {{ job_id }}</div>
+    } -->
+  </nav>
+
+  <main class="main-layout">
+    <section class="sidebar">
+      <div class="control-card">
+        <h2 class="card-title">
+          <span class="status-dot" [class.active]="generating_poster"></span>
+          Poster Details
+        </h2>
+
+        <div class="poster-form">
+          <div class="input-group">
+            <label>Poster Title</label>
+            <input [(ngModel)]="title" type="text" placeholder="Enter title..." />
+          </div>
+
+          <div class="input-group">
+            <label>Poster Style</label>
+            <select [(ngModel)]="genre">
+              <option value="" disabled selected>Select a genre</option>
+              @for (g of genre_options; track g) {
+                <option [value]="g">{{ g | titlecase }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label>Poster Description</label>
+            <textarea
+              [(ngModel)]="description"
+              rows="4"
+              placeholder="A short description..."
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            class="btn-primary"
+            (click)="generatePoster()"
+            [disabled]="isGenerating()"
+          >
+            @if (generating_poster) {
+              <svg class="spinner" viewBox="0 0 24 24">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                  fill="none"
+                ></circle>
+              </svg>
+              Synthesizing...
+            } @else {
+              <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+              Generate Poster
+            }
+          </button>
+
+          @if (poster_images.length > 0) {
+            <div class="candidate-gallery">
+              <label>Design Candidates</label>
+              <div class="gallery-grid">
+                @for (img of poster_images; track img) {
+                  <button
+                    (click)="selectCandidate(img)"
+                    class="gallery-item"
+                    [class.active]="best_img === img"
+                  >
+                    <img [src]="img" alt="Candidate variation" />
+                  </button>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      @if (generating_poster) {
+        <div class="system-badge">
+          <p class="animate-pulse">Status: Generating Poster...</p>
+        </div>
+      }
+    </section>
+    @if (best_img) {
+      <section class="preview-area">
+        <div class="poster-wrapper">
+          <div class="poster-canvas" [ngClass]="genre.toLowerCase()">
+
+            <div class="background-layer">
+              <img [src]="best_img" class="bg-image" alt="Poster background" />
+            </div>
+          </div>
+
+          <button class="btn-download" (click)="downloadPoster()">
+            Download Poster
+            <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </section>
+    }
+  </main>
+</div>
